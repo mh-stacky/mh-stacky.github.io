@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>بيان | العربية داخل الصور بالذكاء الاصطناعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="بيان يساعدك على كتابة نص عربي صحيح ومتصل داخل الصور المولدة بالذكاء الاصطناعي." />
+
+  <!-- خط عربي -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- الخلفية الزخرفية -->
+  <div class="bg-letters">
+    ب ي ا ن ع ر ب ي ة خ ط ن ص ص و ر
+  </div>
+
+  <header class="hero">
+    <h1 class="logo">بيان</h1>
+    <p class="tagline">
+      أداة ذكية لضمان كتابة النص العربي بشكل صحيح، متصل، وواضح داخل الصور المولدة بالذكاء الاصطناعي.
+    </p>
+  </header>
+
+  <section class="steps">
+    <div class="step">① اكتب وصف الصورة والنص العربي ومكانه</div>
+    <div class="step">② انسخ النتيجة الجاهزة</div>
+    <div class="step">③ استخدمها مع أي نموذج توليد صور</div>
+  </section>
+
+  <main class="tool">
+    <textarea id="userInput" placeholder="اكتب وصف الصورة والنص العربي هنا 😊"></textarea>
+
+    <button id="actionBtn">تأكيد</button>
+
+    <pre id="result" class="hidden"></pre>
+  </main>
+
+  <footer class="footer">
+    <p>
+      بيان مشروع تجريبي يهدف إلى حل مشكلة حقيقية في التعامل مع اللغة العربية داخل أدوات الذكاء الاصطناعي.
+      نعمل باستمرار على تطويره، ويسعدنا سماع رأيك.
+    </p>
+
+    <!-- نموذج التعليقات (خاص بك فقط) -->
+    <form action="https://formspree.io/f/xxxxx" method="POST" class="feedback">
+      <textarea name="message" placeholder="رأيك يهمنا..."></textarea>
+      <button type="submit">إرسال</button>
+    </form>
+
+    <div class="counter">
+      عدد الزوار: <span id="visits">—</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
