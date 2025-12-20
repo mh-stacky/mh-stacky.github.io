@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>بيان | العربية داخل الصور بالذكاء الاصطناعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="بيان يساعدك على كتابة نص عربي صحيح ومتصل داخل الصور المولدة بالذكاء الاصطناعي." />
+
+  <!-- خط عربي -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #2c5aa0;
+      --primary-light: #4a7bc1;
+      --secondary-color: #f8b500;
+      --text-color: #333;
+      --light-bg: #f8f9fa;
+      --border-color: #e0e0e0;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      color: var(--text-color);
+      background-color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* الخلفية الزخرفية */
+    .bg-letters {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.03;
+      font-size: 18vw;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Amiri', serif;
+      white-space: nowrap;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* الهيدر */
+    header.hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+    }
+
+    .logo {
+      font-family: 'Amiri', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: inline-block;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--secondary-color);
+      border-radius: 3px;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      line-height: 1.8;
+    }
+
+    /* خطوات الاستخدام */
+    .steps {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 2.5rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 250px;
+      max-width: 320px;
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.8rem 1.5rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--primary-color);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .step:nth-child(2) {
+      border-top-color: var(--primary-light);
+    }
+
+    .step:nth-child(3) {
+      border-top-color: var(--secondary-color);
+    }
+
+    .step::before {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .step:first-child::before {
+      content: "①";
+    }
+
+    .step:nth-child(2)::before {
+      content: "②";
+    }
+
+    .step:nth-child(3)::before {
+      content: "③";
+    }
+
+    /* أداة النص */
+    .tool {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    #userInput {
+      width: 100%;
+      min-height: 180px;
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      font-family: 'Cairo', sans-serif;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      resize: vertical;
+      transition: var(--transition);
+      background-color: var(--light-bg);
+      line-height: 1.8;
+    }
+
+    #userInput:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+    }
+
+    #userInput::placeholder {
+      color: #888;
+    }
+
+    #actionBtn {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 1.8rem auto;
+      padding: 1rem 2rem;
+      background: linear-gradient(to left, var(--primary-color), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(44, 90, 160, 0.25);
+    }
+
+    #actionBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(44, 90, 160, 0.35);
+    }
+
+    #actionBtn:active {
+      transform: translateY(0);
+    }
+
+    /* النتيجة */
+    #result {
+      background-color: #1e2a3a;
+      color: #e1f5fe;
+      padding: 1.8rem;
+      border-radius: var(--radius);
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--secondary-color);
+      display: none;
+      text-align: left;
+      direction: ltr;
+    }
+
+    #result.show {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* الفوتر */
+    .footer {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      border-top: 5px solid var(--secondary-color);
+    }
+
+    .footer p {
+      max-width: 800px;
+      margin: 0 auto 1.8rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #ddd;
+    }
+
+    /* نموذج التعليقات */
+    .feedback {
+      max-width: 600px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+    }
+
+    .feedback textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 1.2rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: white;
+      resize: vertical;
+      transition: var(--transition);
+    }
+
+    .feedback textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .feedback textarea::placeholder {
+      color: #aaa;
+    }
+
+    .feedback button {
+      background-color: var(--secondary-color);
+      color: #333;
+      border: none;
+      padding: 0.8rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .feedback button:hover {
+      background-color: #ffc720;
+      transform: translateY(-2px);
+    }
+
+    /* عداد الزوار */
+    .counter {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1rem;
+      color: #bbb;
+    }
+
+    #visits {
+      font-weight: 700;
+      color: var(--secondary-color);
+    }
+
+    /* التجاوب مع الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .steps {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .step {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .logo {
+        font-size: 2.8rem;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .tool {
+        padding: 0 1rem;
+      }
+      
+      .footer {
+        padding: 2rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 2.3rem;
+      }
+      
+      .tagline {
+        font-size: 1rem;
+      }
+      
+      .step {
+        padding: 1.5rem 1rem;
+      }
+      
+      #userInput {
+        min-height: 150px;
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الخلفية الزخرفية -->
+  <div class="bg-letters">
+    ب ي ا ن ع ر ب ي ة خ ط ن ص ص و ر
+  </div>
+
+  <header class="hero">
+    <h1 class="logo">بيان</h1>
+    <p class="tagline">
+      أداة ذكية لضمان كتابة النص العربي بشكل صحيح، متصل، وواضح داخل الصور المولدة بالذكاء الاصطناعي.
+    </p>
+  </header>
+
+  <section class="steps">
+    <div class="step">اكتب وصف الصورة والنص العربي ومكانه</div>
+    <div class="step">انسخ النتيجة الجاهزة</div>
+    <div class="step">استخدمها مع أي نموذج توليد صور</div>
+  </section>
+
+  <main class="tool">
+    <textarea id="userInput" placeholder="اكتب وصف الصورة والنص العربي هنا 😊
+
+مثال:
+وصف: لافتة مكتوب عليها 'مرحباً بالعالم' بخط عربي جميل، بخلفية زرقاء فاتحة
+النص: مرحباً بالعالم
+المكان: وسط الصورة"></textarea>
+
+    <button id="actionBtn">تأكيد وإنشاء النص</button>
+
+    <pre id="result"></pre>
+  </main>
+
+  <footer class="footer">
+    <p>
+      بيان مشروع تجريبي يهدف إلى حل مشكلة حقيقية في التعامل مع اللغة العربية داخل أدوات الذكاء الاصطناعي.
+      نعمل باستمرار على تطويره، ويسعدنا سماع رأيك.
+    </p>
+
+    <!-- نموذج التعليقات -->
+    <form class="feedback">
+      <textarea name="message" placeholder="رأيك يهمنا... شاركنا أفكارك ومقترحاتك لتحسين بيان"></textarea>
+      <button type="submit">إرسال الرأي</button>
+    </form>
+
+    <div class="counter">
+      عدد الزوار: <span id="visits">—</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const userInput = document.getElementById('userInput');
+      const actionBtn = document.getElementById('actionBtn');
+      const result = document.getElementById('result');
+      const visits = document.getElementById('visits');
+      const feedbackForm = document.querySelector('.feedback');
+      
+      // محاكاة عدد الزوار
+      let visitorCount = localStorage.getItem('visitorCount');
+      if (!visitorCount) {
+        visitorCount = Math.floor(Math.random() * 100) + 150;
+        localStorage.setItem('visitorCount', visitorCount);
+      }
+      visits.textContent = visitorCount;
+      
+      // زيادة عدد الزوار بمرور الوقت
+      setInterval(() => {
+        visitorCount = parseInt(visitorCount) + 1;
+        visits.textContent = visitorCount;
+        localStorage.setItem('visitorCount', visitorCount);
+      }, 60000); // كل دقيقة
+      
+      // معالجة النص المدخل
+      actionBtn.addEventListener('click', function() {
+        const text = userInput.value.trim();
+        
+        if (!text) {
+          alert('يرجى كتابة وصف الصورة والنص العربي قبل التأكيد');
+          userInput.focus();
+          return;
+        }
+        
+        // محاكاة معالجة النص (يمكن استبدالها بوظيفة حقيقية)
+        const processedText = `🎨 **وصف الصورة**:\n${text}\n\n📋 **النص العربي المُجهز للذكاء الاصطناعي**:\n"${extractArabicText(text)}"\n\n📝 **تعليمات الاستخدام**:\n1. انسخ النص أعلاه\n2. الصقه في أداة توليد الصور بالذكاء الاصطناعي\n3. تأكد من ذكر أن النص العربي يجب أن يكون متصلاً وواضحاً\n\n✨ **ملاحظة**: بيان يضمن كتابة النص العربي بشكل صحيح في الصورة الناتجة.`;
+        
+        // عرض النتيجة
+        result.textContent = processedText;
+        result.classList.add('show');
+        
+        // تمرير إلى الأسفل لعرض النتيجة
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // تغيير نص الزر مؤقتاً
+        const originalText = actionBtn.textContent;
+        actionBtn.textContent = '✓ تم الإنشاء!';
+        actionBtn.style.background = 'linear-gradient(to left, #2e7d32, #4caf50)';
+        
+        setTimeout(() => {
+          actionBtn.textContent = originalText;
+          actionBtn.style.background = 'linear-gradient(to left, var(--primary-color), var(--primary-light))';
+        }, 2000);
+      });
+      
+      // محاكاة إرسال التعليقات
+      feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = this.querySelector('textarea').value;
+        
+        if (!message.trim()) {
+          alert('يرجى كتابة رأيك قبل الإرسال');
+          return;
+        }
+        
+        // محاكاة إرسال النموذج
+        const submitBtn = this.querySelector('button');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'جاري الإرسال...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          alert('شكراً لك! تم استلام رأيك وسنأخذه بعين الاعتبار لتحسين بيان.');
+          this.querySelector('textarea').value = '';
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }, 1500);
+      });
+      
+      // وظيفة مساعدة لاستخراج النص العربي
+      function extractArabicText(text) {
+        // هذه وظيفة مبسطة، يمكن تطويرها لاستخراج النص العربي بشكل أدق
+        const arabicMatches = text.match(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF ]+/g);
+        if (arabicMatches && arabicMatches.length > 0) {
+          return arabicMatches.join(' ').trim();
+        }
+        return 'لم يتم العثور على نص عربي واضح في الوصف';
+      }
+      
+      // إضافة نص توضيحي عند التركيز على حقل النص
+      userInput.addEventListener('focus', function() {
+        if (!this.value.trim()) {
+          this.value = `وصف: لافتة مكتوب عليها 'مرحباً بالعالم' بخط عربي جميل، بخلفية زرقاء فاتحة
+النص: مرحباً بالعالم
+المكان: وسط الصورة`;
+        }
+      });
+      
+      // إعادة النص الاصلي إذا لم يتم التعديل
+      userInput.addEventListener('blur', function() {
+        if (this.value.includes('لافتة مكتوب عليها') && !this.value.includes('التعديل')) {
+          this.value = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
