@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>بيان | توليد نصوص عربية صحيحة للذكاء الاصطناعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="بيان - أداة لتوليد أكواد جاهزة تضمن كتابة النص العربي بشكل صحيح في صور الذكاء الاصطناعي" />
+
+  <!-- خط عربي محسن -->
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #2c5aa0;
+      --primary-light: #4a7bc1;
+      --primary-dark: #1a3d7a;
+      --secondary-color: #f8b500;
+      --secondary-light: #ffd166;
+      --text-color: #222;
+      --light-bg: #f8f9fa;
+      --border-color: #d0d7e2;
+      --success-color: #2ecc71;
+      --shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      --radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Naskh Arabic', serif;
+      color: var(--text-color);
+      background-color: #fff;
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* الخلفية الزخرفية */
+    .bg-letters {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.02;
+      font-size: 20vw;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'El Messiri', sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+      background: linear-gradient(45deg, transparent 30%, rgba(44, 90, 160, 0.02) 100%);
+    }
+
+    /* الهيدر */
+    header.hero {
+      text-align: center;
+      padding: 3.5rem 1rem 3rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f5ff 100%);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+      background-size: 200% 100%;
+      animation: gradientMove 3s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .logo {
+      font-family: 'El Messiri', sans-serif;
+      font-size: 5.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color), #f8b500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: inline-block;
+      letter-spacing: -1px;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+      border-radius: 2px;
+    }
+
+    .tagline {
+      font-size: 1.4rem;
+      color: #444;
+      max-width: 900px;
+      margin: 1.5rem auto 0;
+      padding: 0 1.5rem;
+      line-height: 1.9;
+      font-weight: 500;
+    }
+
+    /* خطوات الاستخدام */
+    .steps {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 3rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 2rem;
+      left: 2rem;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 280px;
+      max-width: 360px;
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    }
+
+    .step:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      border-color: var(--primary-light);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border-radius: 50%;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 12px rgba(44, 90, 160, 0.25);
+    }
+
+    .step:nth-child(2) .step-number {
+      background: linear-gradient(135deg, var(--primary-light), #5a8fd8);
+    }
+
+    .step:nth-child(3) .step-number {
+      background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+    }
+
+    .step-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #444;
+      font-weight: 500;
+    }
+
+    /* أداة النص */
+    .tool {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+
+    .input-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+    }
+
+    .input-group {
+      margin-bottom: 2rem;
+    }
+
+    .input-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.8rem;
+      padding-right: 0.5rem;
+    }
+
+    .input-label::after {
+      content: ' *';
+      color: #e74c3c;
+    }
+
+    .input-hint {
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 0.5rem;
+      padding-right: 0.5rem;
+      font-style: italic;
+    }
+
+    textarea.input-field {
+      width: 100%;
+      min-height: 140px;
+      padding: 1.2rem;
+      font-size: 1.1rem;
+      font-family: 'Noto Naskh Arabic', serif;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      resize: vertical;
+      transition: var(--transition);
+      background-color: white;
+      line-height: 1.8;
+      color: var(--text-color);
+    }
+
+    textarea.input-field:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(44, 90, 160, 0.15);
+    }
+
+    textarea.input-field::placeholder {
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    #actionBtn {
+      display: block;
+      width: 100%;
+      max-width: 350px;
+      margin: 2.5rem auto;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 6px 20px rgba(44, 90, 160, 0.3);
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #actionBtn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    #actionBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(44, 90, 160, 0.4);
+    }
+
+    #actionBtn:hover::before {
+      transform: translateX(0);
+    }
+
+    #actionBtn:active {
+      transform: translateY(0);
+    }
+
+    #actionBtn.success {
+      background: linear-gradient(135deg, var(--success-color), #27ae60);
+      box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    /* النتيجة - الكود المضغوط */
+    .result-container {
+      display: none;
+      background: linear-gradient(135deg, #1e2a3a, #2c3e50);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+      border-left: 6px solid var(--secondary-color);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .result-container.show {
+      display: block;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-title {
+      color: var(--secondary-light);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .copy-btn {
+      background: var(--secondary-color);
+      color: #222;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .copy-btn:hover {
+      background: #ffc720;
+      transform: translateY(-2px);
+    }
+
+    .copy-btn.copied {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .copy-btn.copied::before {
+      content: '✓ ';
+    }
+
+    #result {
+      background: rgba(0, 0, 0, 0.2);
+      color: #e1f5fe;
+      padding: 1.5rem;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      direction: ltr;
+      text-align: left;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* الفوتر */
+    .footer {
+      background: linear-gradient(135deg, #2c3e50, #1a2530);
+      color: #ecf0f1;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      border-top: 6px solid var(--secondary-color);
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    }
+
+    .footer p {
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: #ddd;
+      font-weight: 400;
+    }
+
+    /* نموذج التعليقات */
+    .feedback {
+      max-width: 650px;
+      margin: 2.5rem auto;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .feedback textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 1.5rem;
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 1.05rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      resize: vertical;
+      transition: var(--transition);
+    }
+
+    .feedback textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 3px rgba(248, 181, 0, 0.15);
+    }
+
+    .feedback textarea::placeholder {
+      color: #bbb;
+    }
+
+    .feedback button {
+      background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+      color: #222;
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(248, 181, 0, 0.25);
+    }
+
+    .feedback button:hover {
+      background: linear-gradient(135deg, #ffc720, #ffdd66);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(248, 181, 0, 0.35);
+    }
+
+    /* عداد الزوار */
+    .counter {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 1.1rem;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    #visits {
+      font-weight: 800;
+      color: var(--secondary-light);
+      font-size: 1.3rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      min-width: 80px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* التجاوب مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .steps::before {
+        display: none;
+      }
+      
+      .steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      
+      .step {
+        width: 100%;
+        max-width: 500px;
+      }
+      
+      .logo {
+        font-size: 4.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.3rem;
+      }
+      
+      .input-section {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 3.8rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+      }
+      
+      .step {
+        padding: 1.8rem 1.5rem;
+      }
+      
+      .step-content {
+        font-size: 1.05rem;
+      }
+      
+      .tool {
+        padding: 0 1.2rem;
+      }
+      
+      .input-section {
+        padding: 1.5rem;
+      }
+      
+      .footer {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      .result-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      
+      .copy-btn {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 3.2rem;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .steps {
+        padding: 2.5rem 1rem;
+      }
+      
+      .step {
+        min-width: 100%;
+        padding: 1.6rem 1.2rem;
+      }
+      
+      .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      
+      .input-section {
+        padding: 1.2rem;
+      }
+      
+      .input-field {
+        min-height: 120px;
+        padding: 1rem;
+        font-size: 1.05rem;
+      }
+      
+      #actionBtn {
+        font-size: 1.2rem;
+        padding: 1.1rem 2rem;
+      }
+      
+      #result {
+        padding: 1rem;
+        font-size: 0.95rem;
+        max-height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الخلفية الزخرفية -->
+  <div class="bg-letters">
+    ب ي ا ن ع ر ب ي ة خ ط ن ص ص و ر
+  </div>
+
+  <header class="hero">
+    <h1 class="logo">بيان</h1>
+    <p class="tagline">
+      أدخل وصف الصورة والنص العربي، واحصل على كود جاهز لنسخه ولصقه في أي أداة ذكاء اصطناعي تولد صوراً.
+    </p>
+  </header>
+
+  <section class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">اكتب وصف الصورة والنص العربي الذي تريد ظهوره</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">انسخ الكود الجاهز المضغوط</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">الصق الكود في أي أداة توليد صور بالذكاء الاصطناعي</div>
+    </div>
+  </section>
+
+  <main class="tool">
+    <div class="input-section">
+      <div class="input-group">
+        <label class="input-label">وصف الصورة</label>
+        <textarea id="imageDescription" class="input-field" placeholder="صف الصورة التي تريد إنشاءها بالتفصيل..."></textarea>
+        <div class="input-hint">مثال: شعار احترافي لمطعم عربي بخلفية ذهبية وأنماط إسلامية</div>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">النص العربي</label>
+        <textarea id="arabicText" class="input-field" placeholder="اكتب النص العربي الذي تريد ظهوره في الصورة..."></textarea>
+        <div class="input-hint">مثال: مطعم النخبة - المذاق الأصيل</div>
+      </div>
+    </div>
+
+    <button id="actionBtn">توليد الكود الجاهز</button>
+
+    <div class="result-container" id="resultContainer">
+      <div class="result-header">
+        <div class="result-title">الكود الجاهز للنسخ:</div>
+        <button class="copy-btn" id="copyBtn">نسخ الكود</button>
+      </div>
+      <pre id="result"></pre>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>
+      بيان أداة ذكية تضمن كتابة النص العربي بشكل صحيح في الصور المولدة بالذكاء الاصطناعي.
+      الكود الناتج متوافق مع Midjourney، DALL-E، Stable Diffusion، وجميع أدوات توليد الصور.
+    </p>
+
+    <!-- نموذج التعليقات -->
+    <form class="feedback">
+      <textarea name="message" placeholder="رأيك يهمنا... شاركنا أفكارك ومقترحاتك لتحسين بيان"></textarea>
+      <button type="submit">إرسال الرأي</button>
+    </form>
+
+    <div class="counter">
+      عدد الزوار: <span id="visits">—</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const imageDescriptionInput = document.getElementById('imageDescription');
+      const arabicTextInput = document.getElementById('arabicText');
+      const actionBtn = document.getElementById('actionBtn');
+      const resultContainer = document.getElementById('resultContainer');
+      const resultElement = document.getElementById('result');
+      const copyBtn = document.getElementById('copyBtn');
+      const visits = document.getElementById('visits');
+      const feedbackForm = document.querySelector('.feedback');
+      
+      // محاكاة عدد الزوار
+      let visitorCount = localStorage.getItem('visitorCount');
+      if (!visitorCount) {
+        visitorCount = Math.floor(Math.random() * 150) + 200;
+        localStorage.setItem('visitorCount', visitorCount);
+      }
+      visits.textContent = visitorCount;
+      
+      // زيادة عدد الزوار بمرور الوقت
+      setInterval(() => {
+        visitorCount = parseInt(visitorCount) + 1;
+        visits.textContent = visitorCount;
+        localStorage.setItem('visitorCount', visitorCount);
+      }, 90000);
+      
+      // توليد الكود عند الضغط على الزر
+      actionBtn.addEventListener('click', function() {
+        const imageDescription = imageDescriptionInput.value.trim();
+        const arabicText = arabicTextInput.value.trim();
+        
+        if (!imageDescription) {
+          alert('يرجى كتابة وصف للصورة');
+          imageDescriptionInput.focus();
+          return;
+        }
+        
+        if (!arabicText) {
+          alert('يرجى كتابة النص العربي');
+          arabicTextInput.focus();
+          return;
+        }
+        
+        // إنشاء الكود المضغوط
+        const generatedCode = `Arabic calligraphy text: "${arabicText}" - written correctly RTL with connected Arabic script, clear and legible. ${imageDescription}`;
+        
+        // عرض النتيجة
+        resultElement.textContent = generatedCode;
+        resultContainer.classList.add('show');
+        
+        // تغيير زر "توليد الكود" إلى "تم التوليد"
+        const originalText = actionBtn.textContent;
+        actionBtn.textContent = '✓ تم توليد الكود';
+        actionBtn.classList.add('success');
+        
+        // تمرير إلى منطقة النتيجة
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // إعادة الزر إلى حالته الأصلية بعد 3 ثوان
+        setTimeout(() => {
+          actionBtn.textContent = originalText;
+          actionBtn.classList.remove('success');
+        }, 3000);
+      });
+      
+      // نسخ الكود إلى الحافظة
+      copyBtn.addEventListener('click', function() {
+        const codeToCopy = resultElement.textContent;
+        
+        if (!codeToCopy || codeToCopy.trim() === '') {
+          return;
+        }
+        
+        // نسخ النص إلى الحافظة
+        navigator.clipboard.writeText(codeToCopy).then(() => {
+          // تغيير زر النسخ للإشارة إلى النجاح
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'تم النسخ!';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          // طريقة بديلة إذا فشلت النسخ الحديثة
+          const textArea = document.createElement('textarea');
+          textArea.value = codeToCopy;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          // تغيير زر النسخ للإشارة إلى النجاح
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'تم النسخ!';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      
+      // محاكاة إرسال التعليقات
+      feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = this.querySelector('textarea').value;
+        
+        if (!message.trim()) {
+          alert('يرجى كتابة رأيك قبل الإرسال');
+          return;
+        }
+        
+        const submitBtn = this.querySelector('button');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'جاري الإرسال...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          alert('شكراً لك! تم استلام رأيك وسنأخذه بعين الاعتبار لتحسين بيان.');
+          this.querySelector('textarea').value = '';
+          submitBtn.textContent = 'تم الإرسال ✓';
+          submitBtn.style.background = 'linear-gradient(135deg, #2e7d32, #4caf50)';
+          
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = 'linear-gradient(135deg, var(--secondary-color), var(--secondary-light))';
+            submitBtn.disabled = false;
+          }, 2000);
+        }, 1800);
+      });
+      
+      // تحسين تجربة الكتابة
+      [imageDescriptionInput, arabicTextInput].forEach(input => {
+        input.addEventListener('input', function() {
+          // منع الأسطر الفارغة المتكررة
+          const currentValue = this.value;
+          const lines = currentValue.split('\n');
+          
+          let cleanedLines = [];
+          let lastLineWasEmpty = false;
+          
+          for (let line of lines) {
+            const trimmedLine = line.trim();
+            if (trimmedLine === '' && lastLineWasEmpty) {
+              continue;
+            }
+            cleanedLines.push(line);
+            lastLineWasEmpty = trimmedLine === '';
+          }
+          
+          if (cleanedLines.length !== lines.length) {
+            this.value = cleanedLines.join('\n');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
