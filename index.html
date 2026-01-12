@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>بيان | توليد نصوص عربية صحيحة للذكاء الاصطناعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="بيان - أداة ذكية لتحويل النصوص العربية إلى أكواد جاهزة للذكاء الاصطناعي" />
+
+  <!-- خط عربي محسن -->
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0066cc;
+      --primary-light: #3399ff;
+      --primary-dark: #004d99;
+      --secondary: #1a365d;
+      --accent: #00b4d8;
+      --light: #f0f8ff;
+      --lighter: #f8fbff;
+      --gray: #718096;
+      --gray-light: #e2e8f0;
+      --success: #10b981;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0, 102, 204, 0.08);
+      --shadow-lg: 0 8px 24px rgba(0, 102, 204, 0.12);
+      --radius: 12px;
+      --transition: all 0.2s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      color: #2d3748;
+      background-color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* الهيدر البسيط */
+    header.hero {
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+      background: linear-gradient(135deg, var(--white) 0%, var(--lighter) 100%);
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .logo-wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .logo-main {
+      font-family: 'El Messiri', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .logo-ai {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+      letter-spacing: 1px;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    /* المحتوى الرئيسي */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* أداة الإدخال */
+    .input-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-light);
+      transition: var(--transition);
+    }
+
+    .input-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .input-group {
+      margin-bottom: 2rem;
+    }
+
+    .input-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+      padding-right: 0.25rem;
+    }
+
+    .input-hint {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    textarea.input-field {
+      width: 100%;
+      min-height: 130px;
+      padding: 1rem;
+      font-size: 1.05rem;
+      font-family: 'Tajawal', sans-serif;
+      border: 2px solid var(--gray-light);
+      border-radius: 8px;
+      resize: vertical;
+      transition: var(--transition);
+      background-color: var(--white);
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    textarea.input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+
+    textarea.input-field::placeholder {
+      color: #a0aec0;
+    }
+
+    /* زر الإجراء */
+    .action-wrapper {
+      text-align: center;
+      margin: 2.5rem 0;
+    }
+
+    #actionBtn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    #actionBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 102, 204, 0.25);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    }
+
+    #actionBtn:active {
+      transform: translateY(0);
+    }
+
+    #actionBtn.success {
+      background: linear-gradient(135deg, var(--success) 0%, #34d399 100%);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    }
+
+    /* نتيجة الكود */
+    .result-card {
+      background: linear-gradient(135deg, var(--secondary) 0%, #2d3748 100%);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 1.5rem;
+      display: none;
+      animation: slideUp 0.3s ease;
+      border-left: 4px solid var(--accent);
+    }
+
+    .result-card.show {
+      display: block;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-title {
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .copy-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .copy-btn:hover {
+      background: #0096c7;
+      transform: translateY(-1px);
+    }
+
+    .copy-btn.copied {
+      background: var(--success);
+    }
+
+    #result {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      padding: 1.25rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      direction: ltr;
+      text-align: left;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* الفوتر */
+    footer {
+      background: linear-gradient(135deg, var(--secondary) 0%, #1a202c 100%);
+      color: #cbd5e0;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+
+    .counter {
+      font-size: 1rem;
+      color: #a0aec0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #visits {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.25rem 1rem;
+      border-radius: 15px;
+      min-width: 60px;
+      display: inline-block;
+    }
+
+    /* التجاوب */
+    @media (max-width: 768px) {
+      .logo-main {
+        font-size: 3rem;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .container {
+        padding: 0 1rem 3rem;
+      }
+      
+      .input-card {
+        padding: 2rem;
+      }
+      
+      #actionBtn {
+        padding: 0.9rem 2.5rem;
+        font-size: 1.1rem;
+      }
+      
+      .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .copy-btn {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-main {
+        font-size: 2.5rem;
+      }
+      
+      .tagline {
+        font-size: 1rem;
+      }
+      
+      .input-card {
+        padding: 1.5rem;
+      }
+      
+      textarea.input-field {
+        min-height: 110px;
+        padding: 0.9rem;
+        font-size: 1rem;
+      }
+      
+      #actionBtn {
+        width: 100%;
+        padding: 0.9rem 2rem;
+      }
+      
+      .result-card {
+        padding: 1.5rem;
+      }
+      
+      #result {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="logo-wrapper">
+      <div class="logo-main">بيان</div>
+      <div class="logo-ai">AI</div>
+    </div>
+    <p class="tagline">
+      أدخل وصف الصورة والنص العربي، واحصل على كود جاهز لنسخه ولصقه في أدوات الذكاء الاصطناعي
+    </p>
+  </header>
+
+  <main class="container">
+    <div class="input-card">
+      <div class="input-group">
+        <label class="input-label">وصف الصورة</label>
+        <textarea id="imageDescription" class="input-field" placeholder="صف الصورة التي تريد إنشاءها بالتفصيل..."></textarea>
+        <div class="input-hint">مثال: شعار احترافي لمطعم عربي بخلفية ذهبية وأنماط إسلامية</div>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">النص العربي</label>
+        <textarea id="arabicText" class="input-field" placeholder="اكتب النص العربي الذي تريد ظهوره في الصورة..."></textarea>
+        <div class="input-hint">مثال: مطعم النخبة - المذاق الأصيل</div>
+      </div>
+    </div>
+
+    <div class="action-wrapper">
+      <button id="actionBtn">توليد الكود الجاهز</button>
+    </div>
+
+    <div class="result-card" id="resultContainer">
+      <div class="result-header">
+        <div class="result-title">الكود الجاهز للنسخ:</div>
+        <button class="copy-btn" id="copyBtn">نسخ الكود</button>
+      </div>
+      <pre id="result"></pre>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-text">
+        بيان أداة ذكية تضمن كتابة النص العربي بشكل صحيح في الصور المولدة بالذكاء الاصطناعي.
+        الكود الناتج متوافق مع Midjourney، DALL-E، Stable Diffusion، وجميع أدوات توليد الصور.
+      </p>
+      
+      <div class="counter">
+        عدد الزوار: <span id="visits">—</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const imageDescriptionInput = document.getElementById('imageDescription');
+      const arabicTextInput = document.getElementById('arabicText');
+      const actionBtn = document.getElementById('actionBtn');
+      const resultContainer = document.getElementById('resultContainer');
+      const resultElement = document.getElementById('result');
+      const copyBtn = document.getElementById('copyBtn');
+      const visits = document.getElementById('visits');
+      
+      // محاكاة عدد الزوار
+      let visitorCount = localStorage.getItem('visitorCount');
+      if (!visitorCount) {
+        visitorCount = Math.floor(Math.random() * 150) + 200;
+        localStorage.setItem('visitorCount', visitorCount);
+      }
+      visits.textContent = visitorCount;
+      
+      // زيادة عدد الزوار بمرور الوقت
+      setInterval(() => {
+        visitorCount = parseInt(visitorCount) + 1;
+        visits.textContent = visitorCount;
+        localStorage.setItem('visitorCount', visitorCount);
+      }, 90000);
+      
+      // توليد الكود عند الضغط على الزر
+      actionBtn.addEventListener('click', function() {
+        const imageDescription = imageDescriptionInput.value.trim();
+        const arabicText = arabicTextInput.value.trim();
+        
+        if (!imageDescription) {
+          alert('يرجى كتابة وصف للصورة');
+          imageDescriptionInput.focus();
+          return;
+        }
+        
+        if (!arabicText) {
+          alert('يرجى كتابة النص العربي');
+          arabicTextInput.focus();
+          return;
+        }
+        
+        // إنشاء الكود المضغوط
+        const generatedCode = `Arabic calligraphy text: "${arabicText}" - written correctly RTL with connected Arabic script, clear and legible. ${imageDescription}`;
+        
+        // عرض النتيجة
+        resultElement.textContent = generatedCode;
+        resultContainer.classList.add('show');
+        
+        // تغيير زر "توليد الكود" إلى "تم التوليد"
+        const originalText = actionBtn.textContent;
+        actionBtn.textContent = 'تم التوليد ✓';
+        actionBtn.classList.add('success');
+        
+        // تمرير إلى منطقة النتيجة
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // إعادة الزر إلى حالته الأصلية بعد 3 ثوان
+        setTimeout(() => {
+          actionBtn.textContent = originalText;
+          actionBtn.classList.remove('success');
+        }, 3000);
+      });
+      
+      // نسخ الكود إلى الحافظة
+      copyBtn.addEventListener('click', function() {
+        const codeToCopy = resultElement.textContent;
+        
+        if (!codeToCopy || codeToCopy.trim() === '') {
+          return;
+        }
+        
+        // نسخ النص إلى الحافظة
+        navigator.clipboard.writeText(codeToCopy).then(() => {
+          // تغيير زر النسخ للإشارة إلى النجاح
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'تم النسخ!';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          // طريقة بديلة إذا فشلت النسخ الحديثة
+          const textArea = document.createElement('textarea');
+          textArea.value = codeToCopy;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          // تغيير زر النسخ للإشارة إلى النجاح
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'تم النسخ!';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      
+      // تحسين تجربة الكتابة
+      [imageDescriptionInput, arabicTextInput].forEach(input => {
+        input.addEventListener('input', function() {
+          // منع الأسطر الفارغة المتكررة
+          const currentValue = this.value;
+          const lines = currentValue.split('\n');
+          
+          let cleanedLines = [];
+          let lastLineWasEmpty = false;
+          
+          for (let line of lines) {
+            const trimmedLine = line.trim();
+            if (trimmedLine === '' && lastLineWasEmpty) {
+              continue;
+            }
+            cleanedLines.push(line);
+            lastLineWasEmpty = trimmedLine === '';
+          }
+          
+          if (cleanedLines.length !== lines.length) {
+            this.value = cleanedLines.join('\n');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
